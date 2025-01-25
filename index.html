@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Interactiva</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 1s;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            background-image: url('2.png'); /* Updated with provided image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-back {
+            background: #ffffff;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: url('3.png'); /* Updated with provided image */
+            text-align: center;
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: transparent;
+            -webkit-text-stroke: 1px rgb(52, 62, 198);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 20px 10px 0;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            clip-path: polygon(50% 0%, 100% 40%, 85% 100%, 50% 80%, 15% 100%, 0% 40%);
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="card">
+        <div class="card-inner">
+            <!-- Front of the card -->
+            <div class="card-front">
+                <h1>Feliz Cumpleaños</h1>
+                
+            </div>
+            <!-- Back of the card -->
+            <div class="card-back">
+                <p>Feliz Cumpleaños Mer!!! En este dia muy especial la pases feliz al lado de de tus seres queridos y que la alegria sea constante en tu vida.</p>
+                <p>Te deseo lo mejor de corazón. Que Dios te bendiga</p>
+                <p>I Love You</p>
+                <p>N.D.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const heartsContainer = document.querySelector('.hearts');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+            heart.style.opacity = Math.random();
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
